@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ptbr" style="background-color: #ddd;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 2 PDF</title>
+
+</head>
+<style>
+    *
+    {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    button
+    {
+        border: none;
+        background: #ddd;
+        border-radius: 4px;
+        padding: .5rem 1rem;
+        margin-bottom: 1rem;
+        cursor: pointer;
+    }
+
+    body
+    {
+        padding: 10mm; 
+        width: 210mm;
+        min-height: 100vh;
+        background: #fff;
+        color: #444;
+        font-family: system-ui, sans-serif;
+    }
+
+    .container
+    {
+        border: 1px solid #444;
+        padding: 5mm;
+        width: 190mm;
+    }
+
+    h1
+    {
+        font-family: sans-serif;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+
+    p
+    {
+        margin-bottom: 1rem;
+    }
+</style>
+<body>
+    <button>Gerar PDF</button>
+    <div class="container">
+        <h1>Título</h1>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur provident explicabo tenetur maxime nostrum commodi perspiciatis alias dignissimos quidem ad architecto expedita culpa ea corrupti, accusantium totam iusto ipsam voluptatum!</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex earum, in ipsa voluptates eveniet rerum dolorum culpa pariatur possimus, dicta eius eligendi cumque itaque quos est cum. Commodi, quasi ipsa?</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        const button = document.querySelector("button")
+        button.addEventListener("click", () => {
+            const container = document.querySelector(".container")
+            const options = {
+                margin: [10,10,10,10],
+                filename: "file.pdf",
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: "mm",
+                    format: "A4",
+                    orientation: "portrait"
+                }
+            }
+
+            html2pdf().set(options).from(container).save()
+        })
+    </script>
+</body>
+</html>
